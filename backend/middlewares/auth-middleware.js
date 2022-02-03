@@ -8,10 +8,10 @@ module.exports = async function (req, res, next) {
       throw new Error();
     }
     const userData = await tokenService.verifyAccessToken(accessToken);
-    if(!userData){
-        throw new Error();
+    if (!userData) {
+      throw new Error();
     }
-    req.user=userData;
+    req.user = userData;
     // console.log(userData);
     next();
   } catch (err) {

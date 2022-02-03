@@ -6,9 +6,15 @@ import { useSelector } from "react-redux";
 import Authenticate from "./pages/Authenticate/Authenticate";
 import Activate from "./pages/Activate/Activate";
 import Rooms from "./pages/Rooms/Rooms";
-
+import { useLoadingWithRefresh } from "./hooks/useLoadingWithRefresh";
+import Loader from "./components/shared/Loader/Loader";
 function App() {
-  return (
+  /// call refresh endpoint
+  const { loading } = useLoadingWithRefresh();
+
+  return loading ? (
+    <Loader message="loading" />
+  ) : (
     <BrowserRouter>
       {/* navigation for all pages */}
       <Navigation />

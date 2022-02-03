@@ -13,7 +13,7 @@ class ActivateController {
 
     // Image Base64
     const buffer = Buffer.from(
-      avatar.replace(/^data:image\/png;base64,/, ""),
+      avatar.replace(/^data:image\/(png|jpg|jpeg);base64,/, ""),
       "base64"
     );
     const imagePath = `${Date.now()}-${Math.round(Math.random() * 1e9)}.png`;
@@ -39,7 +39,6 @@ class ActivateController {
       user.name = name;
       user.avatar = `/storage/${imagePath}`;
       user.save();
-      
       res.json({ user: new UserDto(user), auth: true });
     } catch (err) {
       res.status(500).json({ message: "Something went wrong!" });
