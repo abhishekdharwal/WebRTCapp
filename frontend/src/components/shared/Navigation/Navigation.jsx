@@ -8,7 +8,7 @@ import { setAuth } from "../../../store/authSlice";
 // import { setAuth } from "../../../store/authSlice";
 export const Navigation = () => {
   const dispatch = useDispatch();
-  const { isAuth } = useSelector((state) => state.auth);
+  const { isAuth, user } = useSelector((state) => state.auth);
   // children inside the module cannot be applid with nav css so we made our inline css
   const brandStyle = {
     color: "#fff",
@@ -36,7 +36,26 @@ export const Navigation = () => {
         <img src="./images/logo.png" alt="logo" />
         <span style={logoText}>Coderhouse</span>
       </Link>
-      {isAuth && <button onClick={logoutUser}>Logout</button>}
+      {isAuth && (
+        <div className={styles.navRight}>
+          <h3>{user?.name}</h3>
+          {user.avatar && (
+            <Link to="/">
+              <img
+                className={styles.avatar}
+                src={user.avatar ? user.avatar : "/images/monkey1.png"}
+                width="50"
+                height="50"
+                alt="avatar"
+              />
+            </Link>
+          )}
+          <button onClick={logoutUser} className={styles.navButton}>
+            <img src="./images/logout.png" alt="logout" />
+          </button>
+        </div>
+      )}
+      {/* {isAuth && <button onClick={logoutUser} className={`${styles.navButton}`}>Logout</button>} */}
     </nav>
   );
 };

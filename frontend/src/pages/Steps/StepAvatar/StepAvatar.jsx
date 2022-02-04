@@ -7,13 +7,14 @@ import { setAvatar } from "../../../store/activateSlice";
 import { activate } from "../../../http";
 import { setAuth } from "../../../store/authSlice";
 import Loader from "../../../components/shared/Loader/Loader";
+import { useEffect } from "react";
 
 const StepAvtar = ({ nextStep }) => {
   const dispatch = useDispatch();
   const { name, avatar } = useSelector((state) => state.activate);
   const [image, setImage] = useState("/images/monkey1.png");
   const [loading, setLoading] = useState(false);
-
+  const [unMounted, setUnMounted] = useState(false);
   async function submit() {
     if (!name || !avatar) return;
     setLoading(true);
@@ -22,7 +23,9 @@ const StepAvtar = ({ nextStep }) => {
       // console.log("hlelel");
       console.log(data);
       if (data.auth) {
-        dispatch(setAuth(data));
+        if (!unMounted) {
+          dispatch(setAuth(data));
+        }
       }
     } catch (err) {
       console.log("the", err);
@@ -30,6 +33,12 @@ const StepAvtar = ({ nextStep }) => {
       setLoading(false);
     }
   }
+  useEffect(() => {
+    return () => {
+      setUnMounted(true);
+    };
+  }, []);
+
   function captureImage(e) {
     const file = e.target.files[0];
     const reader = new FileReader();

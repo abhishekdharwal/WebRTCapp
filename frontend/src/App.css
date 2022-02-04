@@ -1,9 +1,10 @@
 /* all css is going to apply globaly */
 html {
-  box-sizing: border-box;
   font-size: 16px;
 }
-
+* {
+  box-sizing: border-box;
+}
 body,
 h1,
 h2,
@@ -37,14 +38,21 @@ body {
 }
 
 .container {
-  width: 1200px;
-  max-width: 90%;
+  width: 1500px;
+  max-width: 95%;
   margin: 0 auto;
 }
 
-.cardWrapper {
+cardWrapper {
   display: flex;
   align-items: center;
   justify-content: center;
   min-height: calc(100vh - 140px);
+}
+button {
+  background: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  font-weight: bold;
 }

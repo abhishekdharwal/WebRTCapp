@@ -8,6 +8,7 @@ import Activate from "./pages/Activate/Activate";
 import Rooms from "./pages/Rooms/Rooms";
 import { useLoadingWithRefresh } from "./hooks/useLoadingWithRefresh";
 import Loader from "./components/shared/Loader/Loader";
+import Room from "./pages/Room/Room";
 function App() {
   /// call refresh endpoint
   const { loading } = useLoadingWithRefresh();
@@ -31,6 +32,9 @@ function App() {
         </SemiProtectedRoute>
         <ProtectedRoute path="/rooms">
           <Rooms />
+        </ProtectedRoute>
+        <ProtectedRoute path="/room/:id">
+          <Room />
         </ProtectedRoute>
       </Switch>
     </BrowserRouter>
